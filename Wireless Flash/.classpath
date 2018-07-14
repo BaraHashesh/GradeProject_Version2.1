@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.8.0_73"/>
+	<classpathentry kind="lib" path="libs/jackson-annotations-2.9.4.jar"/>
+	<classpathentry kind="lib" path="libs/jackson-core-2.9.4.jar"/>
+	<classpathentry kind="lib" path="libs/jackson-databind-2.9.4.jar"/>
+	<classpathentry kind="lib" path="libs/sqlite-jdbc-3.21.0.jar"/>
+	<classpathentry kind="lib" path="libs/jfoenix.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

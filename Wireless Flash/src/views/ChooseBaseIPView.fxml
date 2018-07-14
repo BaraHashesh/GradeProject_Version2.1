@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="182.0" prefWidth="425.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ChooseBaseIPController">
+   <children>
+      <Label alignment="CENTER" layoutX="14.0" layoutY="29.0" prefHeight="27.0" prefWidth="405.0" text="Please Enter The Base IP For The Network">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <JFXTextField alignment="CENTER" layoutX="41.0" layoutY="73.0" maxWidth="344.0" minWidth="344.0" prefHeight="37.0" prefWidth="344.0" promptText="BASE IP ADDRESS" />
+      <JFXButton layoutX="236.0" layoutY="130.0" prefHeight="31.0" prefWidth="65.0" ripplerFill="BLACK" style="-fx-background-color: rgb(40,40,200);" text="Enter" textFill="WHITE" />
+      <JFXButton layoutX="157.0" layoutY="130.0" style="-fx-background-color: rgb(200,200,200);" text="Close" textFill="WHITE" />
+   </children>
+</AnchorPane>

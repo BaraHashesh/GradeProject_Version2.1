@@ -56,7 +56,7 @@ public class EstimationViewController implements Runnable{
 	private void initialize() {
 		this.fileSizeDone = 0;
 
-		String[] temp = reduce(this.fileSizeDone);
+		String[] temp = reduce(this.fileSize);
 		
 		String sizeToDisplay = temp[0];
 		String sizeInfo = temp[1];

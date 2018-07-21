@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ServerInfoController">
+   <children>
+      <TableView fx:id="serverInfoTable" prefHeight="323.0" prefWidth="600.0" />
+      <JFXButton fx:id="close" layoutX="159.0" layoutY="334.0" onAction="#close" prefHeight="52.0" prefWidth="124.0" style="-fx-background-color: rgb(200,200,200);" text="Close" textFill="WHITE">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="enter" layoutX="330.0" layoutY="334.0" onAction="#browseStorage" prefHeight="52.0" prefWidth="124.0" style="-fx-background-color: rgb(40,40,200);" text="Choose " textFill="WHITE">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

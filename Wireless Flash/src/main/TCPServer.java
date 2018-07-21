@@ -1,6 +1,7 @@
 package main;
 import java.net.*;
 
+import models.server_models.BroadCastReceiver;
 import models.server_models.ServerHandler;
 
 
@@ -12,7 +13,7 @@ public class TCPServer {
 	public static void main(String argv[]) throws Exception {
 		System.setProperty("java.net.preferIPv4Stack", "true");
 		
-		//new BroadCastReceiver().start();
+		new BroadCastReceiver().start();
 		
 		ServerSocket welcomeSocket = new ServerSocket(8888);
 		ServerSocket welcomeByteSocket = new ServerSocket(9999);

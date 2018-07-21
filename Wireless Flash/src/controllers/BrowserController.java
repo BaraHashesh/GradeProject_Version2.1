@@ -17,6 +17,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import models.client_models.OperatingSystemAdapter;
 import models.client_models.RowData;
 import models.client_models.tcp_connection.BrowsingClient;
@@ -26,6 +27,7 @@ import models.client_models.tcp_connection.UploadClient;
 public class BrowserController implements Initializable{
 	private static String IP ;
 	private static Scene browserScene;
+	private static Stage browserStage;
 	private static ObservableList<RowData> list;
 	private static String parentDirectory = "";
 	private static BrowsingClient browsingClient = null;
@@ -35,18 +37,21 @@ public class BrowserController implements Initializable{
 	
 	@FXML
 	private TableView<RowData> fileTable;
+
 	
 	/**
 	 * method used to convert FXML file to a javafx scene 
 	 * @return Scene of the FXML file
 	 */
-	public Scene getScene() {
+	public Stage getStage() {
 		if(browserScene != null)
-			return browserScene;
+			return browserStage;
 		try {
 			Parent p = FXMLLoader.load(getClass().getResource("/views/BrowserView.fxml"));
 			browserScene = new Scene(p);
-			return browserScene;
+			browserStage = new Stage();
+			browserStage.setScene(browserScene);
+			return browserStage;
 		} catch (IOException e) {
 			System.out.println(e.toString());
 			return null;
@@ -55,7 +60,7 @@ public class BrowserController implements Initializable{
 
 	/**
 	 * set the observable list connected to the Table
-	 * @param listTODisplay list of objects to display
+	 * @param listTODisplay list of files to display
 	 */
 	public static void setList(RowData[] listTODisplay) {
 		list = FXCollections.observableArrayList(listTODisplay);
@@ -66,9 +71,7 @@ public class BrowserController implements Initializable{
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		browsingClient = new BrowsingClient(IP);
-		
+	public void initialize(URL location, ResourceBundle resources) {	
 		TableColumn<RowData, Image> image = new TableColumn<>("");
 		TableColumn<RowData, String> name = new TableColumn<>("name");
     	TableColumn<RowData, String> type = new TableColumn<>("type");
@@ -107,7 +110,8 @@ public class BrowserController implements Initializable{
 	 */
 	private void nextDirectory(){
 		RowData file = fileTable.getSelectionModel().getSelectedItem();
-		if(file.isDirectory()) {
+		
+		if(file != null && file.isDirectory()) {
 			String newPath = file.getPath();
 			parentDirectory = file.getParent();
 			if(parentDirectory == null)
@@ -200,5 +204,14 @@ public class BrowserController implements Initializable{
 	 */
 	public static void setIP(String hostIP) {
 		IP = hostIP;
+		browsingClient = new BrowsingClient(IP);
+	}
+	
+	/**
+	 * destory method for singlton variables of the object
+	 */
+	public static void destorySinglton() {
+		BrowserController.browserScene = null;
+		BrowserController.browserStage = null;
 	}
 }

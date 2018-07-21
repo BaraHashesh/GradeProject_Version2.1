@@ -143,8 +143,6 @@ public class RowData extends BasicFileData{
 	public String obtainPreviousDirectory() {
 		String parent = getParent();
 
-		System.out.print(parent+"\t");
-
 		int i = parent.lastIndexOf(OperatingSystemAdapter.getOS().getFileDash());
 
 		return parent.substring(0, i+1);

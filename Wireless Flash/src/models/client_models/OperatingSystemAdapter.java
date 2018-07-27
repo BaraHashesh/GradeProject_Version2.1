@@ -7,7 +7,7 @@ public class OperatingSystemAdapter {
 
     private static OperatingSystemAdapter os;
     private static char dash;
-    private static char fileDash = '\\';
+    private static char fileDash = '/';
 
     /**
      * method used to get a singleton instance of OperatingSystemAdapter

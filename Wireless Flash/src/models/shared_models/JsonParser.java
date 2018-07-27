@@ -3,8 +3,6 @@ package models.shared_models;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
-import models.client_models.RowData;
-
 /**
  * This class is used to parse object into json string 
  * as well as parse object from json string
@@ -33,7 +31,7 @@ public class JsonParser {
 	public static BasicFileData[] JsonToBasicFileData(String json){
 		try {
 			ObjectMapper om = new ObjectMapper();
-			return om.readValue(json, RowData[].class);
+			return om.readValue(json, BasicFileData[].class);
 		}catch (Exception e) {
 			//e.printStackTrace();
 			return null;

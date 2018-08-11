@@ -14,7 +14,6 @@ public class TCPServer {
 		System.setProperty("java.net.preferIPv4Stack", "true");
 		
 		new BroadCastReceiver().start();
-		
 		ServerSocket welcomeSocket = new ServerSocket(8888);
 		ServerSocket welcomeByteSocket = new ServerSocket(9999);
 

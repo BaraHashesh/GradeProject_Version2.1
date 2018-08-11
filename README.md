@@ -1,17 +1,40 @@
-This is a modified version of the 2.0 version
+# Wireless Storage Device
 
-Intellij IDE was used instead of eclipse
+This project was generated using the [Eclipse IDE](https://www.eclipse.org/)
 
-Gradual Optimization as well as modifications will be added on this version
+## Project Description
 
-	1- Optimize File Meta data -> this is done
+This project is implemented in order to create a connection between storage devices 
+and the user device (PC/MAC/Mobile) via a wireless connection.
+
+## What's to Come
+
+The project currently is nearly finished as basic functionalities for a storage device
+have already been implemented (store, delete, retrieve, and browse operations), however
+several new features are planned to be added soon, which are:
+
+1- Optimize File Meta data	
+
+	This has already been implemented
 	
-	2- Create Popups 
-	
-	3- add encryption 
-	
-	4- add compression  -> dropped due to long execution time
-	
-	5- work on mobile
-	
-	6- try to create a small distributed system -> fondations have been created only server side semaphore remain to be implemented
+2- Compression 
+
+	Dropped due to long execution time
+
+3- Encryption
+
+	 Have yet to decide no an encryption standard 
+	 
+4- Try to change the structure of the system as such it supports multiple storage devices 
+at any given time (previous structure supports one device) 
+
+	Foundations have been created only server side semaphore
+	remains to be implemented
+
+5- Create a funtioning mobile version of the project (android) 
+
+	Work has yet to start on this
+
+6- Create popups to appear in case of errors
+
+	Work has yet to start on this (not of much importance)

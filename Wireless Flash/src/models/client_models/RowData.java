@@ -174,4 +174,17 @@ public class RowData extends BasicFileData{
 
         return extension;
     }
+    
+    public static RowData[] convertBasicFileDataToRowData(BasicFileData... basicFileDatas) {
+    	RowData[] result = new RowData[basicFileDatas.length];
+    	
+    	for(int i = 0; i < basicFileDatas.length; i++) {
+    		result[i] = new RowData();
+    		result[i].setPath(basicFileDatas[i].getPath());
+    		result[i].setDirectory(basicFileDatas[i].isDirectory());
+    		result[i].setLastModified(basicFileDatas[i].getLastModified());
+    		result[i].setSize(basicFileDatas[i].getLastModified());
+    	}
+    	return result;
+    }
 }

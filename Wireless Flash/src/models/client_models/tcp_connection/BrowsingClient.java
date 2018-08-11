@@ -62,7 +62,7 @@ public class BrowsingClient {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return (RowData[]) JsonParser.JsonToBasicFileData(response.toString());
+		return RowData.convertBasicFileDataToRowData(JsonParser.JsonToBasicFileData(response.toString()));
 	}
 	
 	/**

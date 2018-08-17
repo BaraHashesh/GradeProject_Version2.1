@@ -1,26 +1,20 @@
 package main;
 
-import controllers.ChooseBaseIPController;
-import javafx.application.Application;
-import javafx.stage.Stage;
+import models.shared_models.JsonParser;
+import models.shared_models.Message;
 
-public class Test extends Application{
+public class Test{
    
-	public static Stage networkStage;
-	public static Stage browserStage;
 	
    public static void main(String[] args) {
-	   System.setProperty("java.net.preferIPv4Stack", "true");
-	   Application.launch(args);
-//      try {
-//         Enumeration<NetworkInterface> nets = NetworkInterface.getNetworkInterfaces();
-//         for (NetworkInterface netint : Collections.list(nets))
-//            displayInterfaceInformation(netint);
-//      }catch (Exception e){
-//         e.printStackTrace();
-//      }
+	   Message temp = new Message();
+	   temp.createBrowseMessage("test");
 	   
-	   
+	   String json = JsonParser.messageToJson(temp);
+	   Message re = JsonParser.jsonToMessage(json);
+			   
+	   System.out.println(json);
+	   System.out.println(re);
    }
 //   private static void displayInterfaceInformation(NetworkInterface netint) throws SocketException {
 //      System.out.printf("Display name: %s\n", netint.getDisplayName());
@@ -31,10 +25,4 @@ public class Test extends Application{
 //      }
 //      System.out.printf("\n");
 //   }
-   
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		networkStage = new ChooseBaseIPController().getStage();	
-		networkStage.show();
-	}
 }

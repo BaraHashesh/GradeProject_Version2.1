@@ -8,17 +8,12 @@ import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 
 import models.shared_models.JsonParser;
+import models.shared_models.Message;
 
 /**
  * This Class is used to Handle connection Sockets that the server creates Using Threads
  */
-public class ServerHandler implements Runnable{
-	private static final String DOWNLOAD_REQUEST = "Download";
-	private static final String UPLOAD_REQUEST = "Upload";
-	private static final String DELETE_REQUEST = "Delete";
-	private static final String BROWSER_REQUEST = "Browser";
-	private static final String TEST_REQUEST = "Test";
-	
+public class ServerHandler implements Runnable{	
 	private Socket connectionSocket;
 	private Socket byteSocket;
 	private Thread thread;
@@ -41,7 +36,7 @@ public class ServerHandler implements Runnable{
 	
 	@Override
 	public void run() {
-		String clientRequest, response;
+		Message clientRequest, serverResponse;
 		
 		try {
 			BufferedReader inFromClient = new BufferedReader(
@@ -54,33 +49,34 @@ public class ServerHandler implements Runnable{
 			DataOutputStream outToClientBytes = new DataOutputStream(byteSocket.getOutputStream());
 
 
-			clientRequest = inFromClient.readLine();
+			clientRequest = JsonParser.jsonToMessage(inFromClient.readLine());
 		
-			if(clientRequest.compareTo(BROWSER_REQUEST) == 0) {//browser request
-				String path = inFromClient.readLine();
-				response = JsonParser.basicFileDataToJson(StorageHandler.fileLister(path)) + "\n";
-				outToClientStrings.write(response.getBytes("UTF-8"));
+			if(clientRequest.isBrowseMessage()) {//browser request
+				String path = clientRequest.getMessageInfo();
+				
+				String files = JsonParser.basicFileDataToJson(StorageHandler.fileLister(path));
+				
+				serverResponse = new Message();
+				serverResponse.createSuccessMessage(files);
+				
+				outToClientStrings.write(JsonParser.messageToJson(serverResponse).getBytes("UTF-8"));
+				outToClientStrings.writeByte('\n');
 			}	
 	
-			if(clientRequest.compareTo(DELETE_REQUEST) == 0) {//delete request
-				String path = inFromClient.readLine();
+			if(clientRequest.isDeleteMessage()) {//delete request
+				String path = clientRequest.getMessageInfo();
 				StorageHandler.deleteFile(path);
 			}
 		
 		
-			if(clientRequest.compareTo(DOWNLOAD_REQUEST) == 0) {//download request
-				String path = inFromClient.readLine();
+			if(clientRequest.isDownloadMessage()) {//download request
+				String path = clientRequest.getMessageInfo();
 				StorageHandler.uploadFile(outToClientStrings, outToClientBytes, path);
 			}
 			
-			if(clientRequest.compareTo(UPLOAD_REQUEST) == 0) {//upload request
-				String path = inFromClient.readLine();
+			if(clientRequest.isUploadMessage()) {//upload request
+				String path = clientRequest.getMessageInfo();
 				StorageHandler.downloadFile(inputStreamBytes, inFromClient, path);
-			}
-		
-			if(clientRequest.compareTo(TEST_REQUEST) == 0) {
-				String path = inFromClient.readLine();
-				StorageHandler.uploadFile(outToClientStrings, outToClientBytes, path);
 			}
 
 			inputStreamBytes.close();

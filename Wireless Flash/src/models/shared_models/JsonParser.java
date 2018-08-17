@@ -28,12 +28,42 @@ public class JsonParser {
 	 * @param json is json string containing BasicFileData objects
 	 * @return list of BasicFileData Objects
 	 */
-	public static BasicFileData[] JsonToBasicFileData(String json){
+	public static BasicFileData[] jsonToBasicFileData(String json){
 		try {
 			ObjectMapper om = new ObjectMapper();
 			return om.readValue(json, BasicFileData[].class);
 		}catch (Exception e) {
-			//e.printStackTrace();
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	/**
+	 * method used to convert Message objects into json string
+	 * @param message is a Message objects
+	 * @return json string containing a Message object
+	 */
+	public static String messageToJson(Message message) {
+		try {
+			ObjectWriter ow = new ObjectMapper().writer();
+			return ow.writeValueAsString(message);
+		}catch (Exception e) {
+			e.printStackTrace();
+			return "";
+		}
+	}
+	
+	/**
+	 * method used to convert json string into a Message object
+	 * @param json is json string containing a Message object
+	 * @return a Message object
+	 */
+	public static Message jsonToMessage(String json){
+		try {
+			ObjectMapper om = new ObjectMapper();
+			return om.readValue(json, Message.class);
+		}catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 	}

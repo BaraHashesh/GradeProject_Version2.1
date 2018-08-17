@@ -1,7 +1,7 @@
 package main;
 
 
-import models.client_models.tcp_connection.BroadCastSender;
+import models.client_models.connection.BroadCastSender;
 
 public class TestBroad {
 

@@ -89,14 +89,26 @@ public class BasicFileData{
 		this.path = path;
 	}
 
+	/**
+	 * set method for size
+	 * @param size is the new size for the file
+	 */
 	public void setSize(long size) {
 		this.size = size;
 	}
 
+	/**
+	 * set method for lastModified
+	 * @param lastModified is the new date for the last edit for the file
+	 */
 	public void setLastModified(long lastModified) {
 		this.lastModified = lastModified;
 	}
 
+	/**
+	 * set method for directory
+	 * @param directory is the new status of the file if it's a directory or a normal file
+	 */
 	public void setDirectory(boolean directory) {
 		this.directory = directory;
 	}

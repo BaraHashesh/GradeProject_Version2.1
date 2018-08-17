@@ -86,7 +86,7 @@ public class FileTransfer {
 		FileOutputStream output = null;
 		try {
 			for(String temp; (temp = inputStream.readLine()) != null; ) {
-				BasicFileData[] tempBasicFileData = JsonParser.JsonToBasicFileData(temp);
+				BasicFileData[] tempBasicFileData = JsonParser.jsonToBasicFileData(temp);
 				BasicFileData basicFileData = null;
 
 				if(tempBasicFileData != null)

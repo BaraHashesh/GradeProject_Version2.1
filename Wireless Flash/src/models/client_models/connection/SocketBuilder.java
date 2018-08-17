@@ -1,4 +1,4 @@
-package models.client_models.tcp_connection;
+package models.client_models.connection;
 
 import java.net.Socket;
 

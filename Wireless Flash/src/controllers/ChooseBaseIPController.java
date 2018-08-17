@@ -8,7 +8,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import main.Main;
 import models.client_models.ServerInfo;
-import models.client_models.tcp_connection.BroadCastSender;
+import models.client_models.connection.BroadCastSender;
 
 import java.io.IOException;
 import java.util.ArrayList;

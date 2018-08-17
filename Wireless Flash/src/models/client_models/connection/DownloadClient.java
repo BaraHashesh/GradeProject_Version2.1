@@ -1,7 +1,9 @@
-package models.client_models.tcp_connection;
+package models.client_models.connection;
 
 import models.client_models.EstimationViewManagementThread;
 import models.shared_models.FileTransfer;
+import models.shared_models.JsonParser;
+import models.shared_models.Message;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -54,7 +56,11 @@ public class DownloadClient implements Runnable{
 			
 			DataOutputStream outToServer = new DataOutputStream(clientSocketStrings.getOutputStream());
 			
-			request = "Download" + "\n" + path;
+			Message requestMessage = new Message();
+			requestMessage.createDownloadMessage(path);
+			
+			request = JsonParser.messageToJson(requestMessage);
+			
 			outToServer.write(request.getBytes("UTF-8"));
 			outToServer.writeByte('\n');
 
@@ -72,7 +78,6 @@ public class DownloadClient implements Runnable{
 					size, fileTransfer, clientSocketStrings, clientSocketBytes);
 			manage.start();
 			fileTransfer.receiveFiles(bytesStream, inFromServer, locationToSave);
-
 
 			clientSocketBytes.close();
 			clientSocketStrings.close();

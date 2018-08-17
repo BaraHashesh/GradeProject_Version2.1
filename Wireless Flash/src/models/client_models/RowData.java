@@ -140,7 +140,7 @@ public class RowData extends BasicFileData{
 	 * method used to obtain parent directory
 	 * @return directory at which the parent exists
 	 */
-	public String obtainPreviousDirectory() {
+	public String getPreviousDirectory() {
 		String parent = getParent();
 
 		int i = parent.lastIndexOf(OperatingSystemAdapter.getOS().getFileDash());

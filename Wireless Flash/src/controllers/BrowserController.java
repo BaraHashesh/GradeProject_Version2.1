@@ -20,9 +20,9 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import models.client_models.OperatingSystemAdapter;
 import models.client_models.RowData;
-import models.client_models.tcp_connection.BrowsingClient;
-import models.client_models.tcp_connection.DownloadClient;
-import models.client_models.tcp_connection.UploadClient;
+import models.client_models.connection.BrowsingClient;
+import models.client_models.connection.DownloadClient;
+import models.client_models.connection.UploadClient;
 
 public class BrowserController implements Initializable{
 	private static String IP ;
@@ -131,7 +131,7 @@ public class BrowserController implements Initializable{
 			updateLabel(parentDirectory);
 		}
 		else {
-			String path = list.get(0).obtainPreviousDirectory();
+			String path = list.get(0).getPreviousDirectory();
 			setList(browsingClient.browserRequest(path));
 			updateLabel(list.get(0).getPath().
 					substring(0, list.get(0).getPath().lastIndexOf(list.get(0).getName())));

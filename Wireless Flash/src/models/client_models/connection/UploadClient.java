@@ -1,7 +1,9 @@
-package models.client_models.tcp_connection;
+package models.client_models.connection;
 
 import models.client_models.EstimationViewManagementThread;
 import models.shared_models.FileTransfer;
+import models.shared_models.JsonParser;
+import models.shared_models.Message;
 
 import java.io.DataOutputStream;
 import java.io.File;
@@ -53,9 +55,14 @@ public class UploadClient implements  Runnable{
 
 			DataOutputStream outToServerBytes = new DataOutputStream(clientSocketBytes.getOutputStream());
 			
-			request = "Upload" + "\n" + locationToSave;
+			Message requestMessage = new Message();
+			requestMessage.createUploadMessage(locationToSave);
+			
+			request = JsonParser.messageToJson(requestMessage);
+			
 			outToServerString.write(request.getBytes("UTF-8"));
 			outToServerString.writeByte('\n');
+			
 			String parent = file.getParent();
 			FileTransfer fileTransfer = new FileTransfer();
 			EstimationViewManagementThread manage = new EstimationViewManagementThread(
@@ -63,6 +70,7 @@ public class UploadClient implements  Runnable{
 					clientSocketStrings, clientSocketBytes);
 			manage.start();
 			fileTransfer.sendFiles(outToServerString, outToServerBytes, file, parent);
+			
 			outToServerString.close();
 			clientSocketStrings.close();
 			clientSocketBytes.close();

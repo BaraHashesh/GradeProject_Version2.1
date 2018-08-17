@@ -1,7 +1,8 @@
-package models.client_models.tcp_connection;
+package models.client_models.connection;
 
 import models.client_models.RowData;
 import models.shared_models.JsonParser;
+import models.shared_models.Message;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -48,7 +49,11 @@ public class BrowsingClient {
 	                 new InputStreamReader(
 	                		 clientSocketStrings.getInputStream(), StandardCharsets.UTF_8));
 		
-			request = "Browser" + "\n" + path;
+			Message requestMessage = new Message();
+			requestMessage.createBrowseMessage(path);
+			
+			request = JsonParser.messageToJson(requestMessage);
+			
 			outToServer.write(request.getBytes("UTF-8"));
 			outToServer.writeByte('\n');
 			
@@ -59,10 +64,18 @@ public class BrowsingClient {
 			inFromServer.close();
 			clientSocketStrings.close();
 			clientSocketBytes.close();
+			
+			
+			Message responseMessage = JsonParser.jsonToMessage(response.toString());
+			
+			return RowData.
+					convertBasicFileDataToRowData(
+							JsonParser.jsonToBasicFileData(responseMessage.getMessageInfo())
+							);
 		}catch(Exception e) {
 			e.printStackTrace();
+			return null;
 		}
-		return RowData.convertBasicFileDataToRowData(JsonParser.JsonToBasicFileData(response.toString()));
 	}
 	
 	/**
@@ -72,15 +85,24 @@ public class BrowsingClient {
 	public void deleteRequest(String path) {
 		String request;
 		try {
-			Socket clientSocket = new Socket(IP, 6789);
-			@SuppressWarnings({ "unused", "resource" })
-			Socket clientSocketBytes = new Socket(IP, 9999);
+			SocketBuilder socketBuilder = new SocketBuilder(this.IP);
+			
+			Socket clientSocket = socketBuilder.createStringSocket();
+			Socket clientSocketBytes = socketBuilder.createByteSocket();
+			
 			DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
-			request = "Delete" + "\n" + path;
+			
+			Message requestMessage = new Message();
+			requestMessage.createDeleteMessage(path);
+			
+			request = JsonParser.messageToJson(requestMessage);
+			
 			outToServer.write(request.getBytes("UTF-8"));
 			outToServer.writeByte('\n');
+			
 			outToServer.close();
 			clientSocket.close();
+			clientSocketBytes.close();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

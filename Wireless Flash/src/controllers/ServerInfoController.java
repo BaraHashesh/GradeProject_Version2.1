@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 import main.Main;
 import models.client_models.RowData;
 import models.client_models.ServerInfo;
-import models.client_models.tcp_connection.BrowsingClient;
+import models.client_models.connection.BrowsingClient;
 
 public class ServerInfoController implements Initializable {
 	private static Scene serverInfoScene;

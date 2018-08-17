@@ -76,7 +76,7 @@ public class BasicFileData{
 
 	@Override
 	public String toString() {
-		return "BasicFileData [path=" + path + "]";
+		return "BasicFileData [path=" + path + ", size=" + size + "]";
 	}
 
 

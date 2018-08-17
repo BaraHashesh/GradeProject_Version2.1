@@ -24,7 +24,7 @@ public class FileTransfer {
 			DataOutputStream outputStreamBytes,
 			File file, String mainPath) {
 		
-		try {
+		try {			
 			//check if pipe was broken
 			if(!work)
 				return;
@@ -133,7 +133,12 @@ public class FileTransfer {
 				}
 			}
 		}catch(Exception e) {	
-			try {output.close();} catch (IOException e1) {}
+			try {
+				output.close();
+			} 
+			catch (IOException e1) {
+				
+			}
 			deleteFile(firstFile);
 			e.printStackTrace();
 		}

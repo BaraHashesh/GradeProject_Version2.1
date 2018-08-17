@@ -5,7 +5,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
-
 import models.shared_models.BasicFileData;
 import models.shared_models.FileTransfer;
 
@@ -62,6 +61,7 @@ public class StorageHandler {
 	public static void uploadFile(DataOutputStream outToClientStrings,
 			DataOutputStream outToClientBytes, String path) {
 		File mainFile = new File(path);
+		
 		String parent = mainFile.getParent();
 		FileTransfer fileTransfer = new FileTransfer();
 		try {

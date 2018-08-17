@@ -30,7 +30,8 @@ public class RowData extends BasicFileData{
 			return "";
 
 		else {
-			long totalSize = getSize();
+			long totalSize = this.getSize();
+			
 			String info = "B";
 
 			if(totalSize >= 1024) {
@@ -42,7 +43,7 @@ public class RowData extends BasicFileData{
 				totalSize = (long)Math.ceil((double)totalSize/1024.0);
 				info = "MB";
 			}
-
+			
 			return totalSize + " " + info;
 		}
 	}
@@ -183,7 +184,7 @@ public class RowData extends BasicFileData{
     		result[i].setPath(basicFileDatas[i].getPath());
     		result[i].setDirectory(basicFileDatas[i].isDirectory());
     		result[i].setLastModified(basicFileDatas[i].getLastModified());
-    		result[i].setSize(basicFileDatas[i].getLastModified());
+    		result[i].setSize(basicFileDatas[i].getSize());
     	}
     	return result;
     }

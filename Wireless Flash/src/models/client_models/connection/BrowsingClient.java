@@ -93,7 +93,7 @@ public class BrowsingClient {
 	 * @param path
 	 *            is the path to the file/directory within the flash
 	 */
-	public void deleteRequest(String path) {
+	public boolean deleteRequest(String path) {
 		String request;
 		try {
 			SocketBuilder socketBuilder = new SocketBuilder(this.IP);
@@ -121,14 +121,17 @@ public class BrowsingClient {
 				/*
 				 * Handle Error Here
 				 */
+				return false;
 			}
 			
 			inFromServer.close();
 			outToServer.close();
 			clientSocketStrings.close();
 			clientSocketBytes.close();
+			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
+			return false;
 		}
 	}
 

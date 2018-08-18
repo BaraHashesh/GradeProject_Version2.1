@@ -152,9 +152,11 @@ public class BrowserController implements Initializable{
 	 */
 	public void delete() {
 		RowData file = fileTable.getSelectionModel().getSelectedItem();
-		browsingClient.deleteRequest(file.getPath());
-		list.remove(file);
-		fileTable.setItems(list);
+		// check if delete was successful
+		if (browsingClient.deleteRequest(file.getPath())) {
+			list.remove(file);
+			fileTable.setItems(list);
+		}
 	}
 	
 	/**

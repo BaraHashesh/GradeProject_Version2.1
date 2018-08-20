@@ -14,7 +14,7 @@ import models.shared_models.FileTransfer;
  */
 public class StorageHandler {
 	
-	private static final String ROOT = "D:\\";
+	private static final String ROOT = "/media/pi/";
 
 	/**
 	 * Method used to get the file list in a folder in the USB
@@ -84,7 +84,7 @@ public class StorageHandler {
 			path = ROOT;
 		
 		if(path.compareTo(ROOT) != 0)
-			path = path + "\\";
+			path = path + "/";
 		
 		try {
 			new FileTransfer().receiveFiles(bytesStream, fromClient, path);

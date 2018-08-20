@@ -33,7 +33,6 @@ public class FileTransfer {
 
 			basicFileData.setPath(basicFileData.getPath().substring(mainPath.length()));
 			
-			
 			if(basicFileData.getPath().startsWith("\\") || basicFileData.getPath().startsWith("/"))
 				basicFileData.setPath(basicFileData.getPath().substring(1));
 
@@ -93,25 +92,26 @@ public class FileTransfer {
 					basicFileData = tempBasicFileData[0];
 				else
 					throw new Exception("No Meta Data");
-
+				
 				if(basicFileData.isDirectory()) {
 					File file = new File(path+basicFileData.getPath());
 					
 					//check if file is the first to be received
-					if(firstFile == null)
-						firstFile = file;
-					
+					if(this.firstFile == null)
+						this.firstFile = file;
 					file.mkdirs();
 				}
-				else {
+				else {			
+					File file = new File(path+basicFileData.getPath());
 
-					output = new FileOutputStream(path+basicFileData.getPath());
+					output = new FileOutputStream(file);
+					
 					long size = basicFileData.getSize();
 					byte[] buffer = new byte[BUFFER];
 
 					//check if file is the first to be received
-					if(firstFile == null)
-						firstFile = new File(path+basicFileData.getPath());
+					if(this.firstFile == null)
+						this.firstFile = new File(path+basicFileData.getPath());
 					
 					while(size > 0) {
 						int bytesRead = 0;
@@ -137,9 +137,9 @@ public class FileTransfer {
 				output.close();
 			} 
 			catch (IOException e1) {
-				
+				e1.printStackTrace();
 			}
-			deleteFile(firstFile);
+			deleteFile(this.firstFile);
 			e.printStackTrace();
 		}
 	}

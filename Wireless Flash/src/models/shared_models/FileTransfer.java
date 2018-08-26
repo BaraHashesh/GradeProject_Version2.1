@@ -33,7 +33,12 @@ public class FileTransfer {
 
 			basicFileData.setPath(basicFileData.getPath().substring(mainPath.length()));
 			
-			if(basicFileData.getPath().startsWith("\\") || basicFileData.getPath().startsWith("/"))
+			
+			if(basicFileData.getPath().contains("\\")) 
+				basicFileData.setPath(basicFileData.getPath().replaceAll("\\\\", "/"));
+			
+			
+			if(basicFileData.getPath().startsWith("/"))
 				basicFileData.setPath(basicFileData.getPath().substring(1));
 
 			String jsonFile = JsonParser.basicFileDataToJson(basicFileData);
